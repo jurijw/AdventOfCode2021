@@ -31,7 +31,7 @@ def main():
             both sides.
             :param lst: List of numbers, which are checked for differences.
             :param count: Internal parameter that tracks the number of differences.
-            :return: count: The number of sequential increases.
+            :return: The number of sequential increases.
             """
             if len(lst) <= 1:
                 return count
@@ -50,16 +50,25 @@ def main():
             print(f"Requires a recursion depth of: {len(data) // 2 + 4}")
 
         def split_differences(lst, count=0):
+            """
+            Calculate the number of sequential increases in a list of numbers.
+            Splits the list in half recursively, checking for an increase at the split.
+            :param lst: List of numbers, which are checked for differences.
+            :param count: Internal parameter that tracks the number of differences.
+            :return: The number of sequential increases.
+            """
             if len(lst) <= 1:
                 return count
             else:
-                # Split the list into two halves
                 split_index = len(lst) // 2
                 if lst[split_index - 1] < lst[split_index]:
                     count += 1
-                return split_differences(lst[:split_index]) + split_differences(lst[split_index:])
+                return count + split_differences(lst[:split_index]) + split_differences(lst[split_index:])
 
+        print("Split Differences")
         print(f"Number of depth increases: {split_differences(data)}")
+        print("No additional recursion depth required!")
+
 
 if __name__ == "__main__":
     main()
