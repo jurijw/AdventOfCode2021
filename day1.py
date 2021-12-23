@@ -7,12 +7,27 @@ def main():
 
         # PART A
 
+        def simple_differences(lst):
+            """
+            Calculate the number of sequential increases in a list of numbers.
+            :param lst: List of numbers to be checked for sequential increases.
+            :return: The integer number of sequential increases.
+            """
+            count = 0
+            for i in range(len(data) - 1):
+                if data[i] < data[i + 1]:
+                    count += 1
+            return count
+
+        print("-----Simple Differences Method------")
+        print(f"Number of depth increases: {simple_differences(data)}")
+
         def differences(lst, count=0):
             """
             Calculate the number of sequential increases in a list of numbers.
             :param lst: List of numbers, which are checked for differences.
             :param count: Internal parameter that tracks the number of differences.
-            :return: count: The number of sequential increases.
+            :return: The number of sequential increases.
             """
             if len(lst) <= 1:
                 return count
@@ -97,8 +112,6 @@ def main():
             print("----Group Differences Method----")
             print(f"Number of increases in consecutive sums of 3 depths: {group_differences(data)}")
             print(f"Requires a recursion depth of: {len(data) + 1}")
-
-
 
 
 if __name__ == "__main__":
