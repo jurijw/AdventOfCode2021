@@ -14,8 +14,8 @@ def main():
             :return: The integer number of sequential increases.
             """
             count = 0
-            for i in range(len(data) - 1):
-                if data[i] < data[i + 1]:
+            for i in range(len(lst) - 1):
+                if lst[i] < lst[i + 1]:
                     count += 1
             return count
 
@@ -91,6 +91,23 @@ def main():
         # because any two consecutive sets share two numbers in common, we can just compare
         # the 1st to 4th depth, the 2nd to 5th depth, and so on, without having to compare
         # the elements in between.
+
+        def simple_group_differences(lst):
+            """
+            Calculate the number of increases in consecutive sums of 3 numbers.
+            Uses the fact that doing so corresponds to comparing every element, to
+            the number 3 indices higher.
+            :param lst: List of numbers, which are checked for differences.
+            :return: The number of increases in consecutive sums of 3 numbers.
+            """
+            count = 0
+            for i in range(len(lst) - 3):
+                if lst[i] < lst[i + 3]:
+                    count += 1
+            return count
+
+        print("----Simple Group Differences Method----")
+        print(f"Number of increases in consecutive sums of 3 depths: {simple_group_differences(data)}")
 
         def group_differences(lst, count=0):
             """
