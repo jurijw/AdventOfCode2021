@@ -9,6 +9,8 @@ def main():
     # Remember that dictionaries are ordered now :)
     up, down, forward = directions.values()
 
+    # PART A
+
     print("----Recursive Methods----")
     horizontal_position = sum_list(forward)
     depth = subtract_lists(down, up)
@@ -22,6 +24,18 @@ def main():
     print(f"Submarine is at a horizontal position: {horizontal_position}")
     print(f"Submarine is at a depth of: {depth}")
     print(f"Result of multiplying horizontal position and depth: {horizontal_position * depth}")
+
+    # PART B
+    ordered_directions = []
+    with open("Inputs/input2.txt", "r") as f:
+        for line in f.readlines():
+            direction, distance = line.strip().split()
+            ordered_directions.append((direction, int(distance)))
+
+    aim, depth, forward = day_two_part_two(ordered_directions)
+    print("--------PART B---------")
+    print(f"Aim: {aim}, Depth: {depth}, Horizontal Position: {forward}")
+    print(f"Product of depth and horizontal position: {depth * forward}")
 
 
 def simple_sum(lst):
@@ -80,6 +94,26 @@ def subtract_lists(lst1, lst2):
         split_index = len(lst1) // 2
         return subtract_lists(lst1[:split_index], lst2[:split_index]) \
                + subtract_lists(lst1[split_index:], lst2[split_index:])
+
+
+def day_two_part_two(directions):
+    """
+    Computes the depth and horizontal position of the submarine after
+    applying the rules according to day two part two.
+    :param directions: Ordered list of string int tuple pairs, giving
+    direction and distance.
+    :return: The final aim, depth, and horizontal position of the sub.
+    """
+    aim, depth, forward = 0, 0, 0
+    for direc, dist in directions:
+        if direc == "down":
+            aim += dist
+        elif direc == "up":
+            aim -= dist
+        else:
+            forward += dist
+            depth += aim * dist
+    return aim, depth, forward
 
 
 if __name__ == "__main__":
